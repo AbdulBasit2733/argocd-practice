@@ -32,13 +32,12 @@ jobs:
           PAT: ${{ secrets.PAT }}
         run: |
           git clone https://github.com/AbdulBasit2733/argo-deployment.git
-          
+          cd argo-deployment
           sed -i 's|image: ak2733/argocd_week37.2:.*|image: ak2733/argocd_week37.2:${{github.sha}}|' manifest.yml
-          
+
           git config user.name "Github Actions Bot"
           git config user.email "actions@github.com"
 
           git add .
           git commit -m "Update Argocd Practice image tags to ${{github.sha}}"
           git push https://${PAT}@github.com/AbdulBasit2733/argo-deployment.git
-
